@@ -1,4 +1,5 @@
 import { addProjectItem } from "../controllers/project-controller";
+import { loadProject } from "./project-content";
 import createProjectItem from "./project-item";
 import CloseIcon from "../assets/close.svg";
 
@@ -19,6 +20,7 @@ const createProjectModal = () => {
   const closeButton = document.createElement("button");
   closeButton.id = "project-close-button";
   const closeIcon = new Image();
+  closeIcon.className = "close-icon";
   closeIcon.src = CloseIcon;
 
   closeButton.addEventListener("click", () => {
@@ -57,6 +59,7 @@ const triggerProjectModal = () => {
       "project-items-container"
     );
     projectItemsContainer.appendChild(createProjectItem(newProject));
+    loadProject(newProject);
     projectForm.reset();
     toggleModal(projectModal);
     event.preventDefault();

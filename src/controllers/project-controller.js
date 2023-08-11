@@ -9,6 +9,7 @@ const getProjects = () => {
 const addProjectItem = (name, description) => {
   const newProject = projectFactory(name, description, []);
   projects.push(newProject);
+  console.log(projects);
   return newProject;
 };
 

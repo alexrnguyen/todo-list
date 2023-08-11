@@ -1,4 +1,4 @@
-import { loadProject } from "./project-content";
+import { loadProject, clearContent, changeProject } from "./project-content";
 
 const createProjectItem = (project) => {
   const projectItem = document.createElement("div");
@@ -20,8 +20,7 @@ const createProjectItem = (project) => {
   projectItem.appendChild(numTasksContainer);
 
   projectItem.addEventListener("click", () => {
-    projectItem.classList.toggle("active");
-    loadProject(project);
+    changeProject(projectItem, project);
   });
 
   return projectItem;

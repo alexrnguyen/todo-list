@@ -130,12 +130,18 @@ hr {
   display: grid;
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 1rem;
 }
 
 .form-header {
   grid-column: 2;
   text-align: center;
   margin: 0;
+}
+
+.close-icon {
+  width: 25px;
+  height: 25px;
 }
 
 .header-container button {
