@@ -11,7 +11,14 @@ const createSidebar = () => {
 
   const projectItemsContainer = document.createElement("div");
   projectItemsContainer.id = "project-items-container";
-  projectItemsContainer.textContent = "Projects";
+
+  const projectItemsHeader = document.createElement("p");
+  projectItemsHeader.id = "project-items-header";
+  projectItemsHeader.textContent = "Projects";
+  projectItemsContainer.appendChild(projectItemsHeader);
+
+  const itemsContainerUnderline = document.createElement("hr");
+  projectItemsContainer.appendChild(itemsContainerUnderline);
 
   const addProjectButton = document.createElement("button");
   addProjectButton.id = "add-project-button";
