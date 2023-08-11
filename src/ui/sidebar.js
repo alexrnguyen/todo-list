@@ -1,4 +1,5 @@
 import AddIcon from "../assets/add.svg";
+import { triggerProjectModal } from "./modal";
 
 const createSidebar = () => {
   const sidebar = document.createElement("div");
@@ -17,6 +18,7 @@ const createSidebar = () => {
   const addIcon = new Image();
   addIcon.src = AddIcon;
   addProjectButton.appendChild(addIcon);
+  addProjectButton.addEventListener("click", () => triggerProjectModal());
 
   const addProjectText = document.createElement("p");
   addProjectText.textContent = "Add Project";
