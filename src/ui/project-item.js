@@ -1,10 +1,12 @@
+import { loadProject } from "./project-content";
+
 const createProjectItem = (project) => {
   const projectItem = document.createElement("div");
   projectItem.className = "project-item";
 
   const projectName = document.createElement("p");
   projectName.className = "project-item-name";
-  projectName.textContent = project.name;
+  projectName.textContent = project.getName();
 
   const numTasksContainer = document.createElement("div");
   numTasksContainer.className = "num-tasks-container";
@@ -16,6 +18,11 @@ const createProjectItem = (project) => {
 
   projectItem.appendChild(projectName);
   projectItem.appendChild(numTasksContainer);
+
+  projectItem.addEventListener("click", () => {
+    projectItem.classList.toggle("active");
+    loadProject(project);
+  });
 
   return projectItem;
 };

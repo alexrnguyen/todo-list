@@ -1,4 +1,5 @@
 import { addProjectItem } from "../controllers/project-controller";
+import createProjectItem from "./project-item";
 import CloseIcon from "../assets/close.svg";
 
 const createProjectModal = () => {
@@ -16,10 +17,17 @@ const createProjectModal = () => {
   headerContainer.appendChild(header);
 
   const closeButton = document.createElement("button");
+  closeButton.id = "project-close-button";
   const closeIcon = new Image();
   closeIcon.src = CloseIcon;
+
+  closeButton.addEventListener("click", () => {
+    document.getElementById("project-name").value = "";
+    document.getElementById("project-description").value = "";
+    toggleModal(projectModal);
+  });
+
   closeButton.appendChild(closeIcon);
-  closeButton.addEventListener("click", () => toggleModal(projectModal));
   headerContainer.appendChild(closeButton);
 
   const overlay = document.createElement("div");
@@ -43,8 +51,13 @@ const triggerProjectModal = () => {
   projectForm.onsubmit = (event) => {
     const name = document.getElementById("project-name").value;
     const description = document.getElementById("project-description").value;
-    console.log(name, description);
-    addProjectItem(name, description);
+    const newProject = addProjectItem(name, description);
+
+    const projectItemsContainer = document.getElementById(
+      "project-items-container"
+    );
+    projectItemsContainer.appendChild(createProjectItem(newProject));
+    projectForm.reset();
     toggleModal(projectModal);
     event.preventDefault();
   };
@@ -88,6 +101,7 @@ const createProjectForm = () => {
   descriptionInputContainer.appendChild(descriptionInput);
   projectForm.appendChild(descriptionInputContainer);
 
+  // Add Project Button
   const addProjectButton = document.createElement("button");
   addProjectButton.type = "submit";
   addProjectButton.className = "submit-button";

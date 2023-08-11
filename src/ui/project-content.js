@@ -5,4 +5,6 @@ const createProjectContent = () => {
   return projectContent;
 };
 
-export default createProjectContent;
+const loadProject = (project) => {};
+
+export { createProjectContent, loadProject };

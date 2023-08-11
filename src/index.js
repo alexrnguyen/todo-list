@@ -1,6 +1,6 @@
 import createHeader from "./ui/header";
 import createSidebar from "./ui/sidebar";
-import createProjectContent from "./ui/project-content";
+import { createProjectContent } from "./ui/project-content";
 import { createProjectModal } from "./ui/modal";
 import "./css/style.css";
 

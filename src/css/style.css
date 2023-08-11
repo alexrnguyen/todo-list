@@ -62,12 +62,6 @@ h1 {
   padding: 1rem;
 }
 
-.project-item {
-  display: flex;
-  gap: 1rem;
-  font-size: 2rem;
-}
-
 #project-items-container {
   font-size: 2rem;
 }
@@ -76,6 +70,20 @@ h1 {
   visibility: hidden;
 }
 /* || Project Item */
+.project-item {
+  display: flex;
+  gap: 1rem;
+  font-size: 2rem;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.project-item.active {
+  background-color: var(--primary-color);
+}
 
 /* || Project Content */
 

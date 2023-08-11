@@ -1,13 +1,13 @@
 import AddIcon from "../assets/add.svg";
 import { triggerProjectModal } from "./modal";
+import createProjectItem from "./project-item";
+import projectFactory from "../models/project";
 
 const createSidebar = () => {
   const sidebar = document.createElement("div");
   sidebar.id = "sidebar";
 
-  const generalItem = document.createElement("div");
-  generalItem.className = "project-item";
-  generalItem.textContent = "General";
+  const generalItem = projectFactory("General", "", []);
 
   const projectItemsContainer = document.createElement("div");
   projectItemsContainer.id = "project-items-container";
@@ -18,13 +18,15 @@ const createSidebar = () => {
   const addIcon = new Image();
   addIcon.src = AddIcon;
   addProjectButton.appendChild(addIcon);
-  addProjectButton.addEventListener("click", () => triggerProjectModal());
+  addProjectButton.addEventListener("click", () => {
+    triggerProjectModal();
+  });
 
   const addProjectText = document.createElement("p");
   addProjectText.textContent = "Add Project";
   addProjectButton.appendChild(addProjectText);
 
-  sidebar.appendChild(generalItem);
+  sidebar.appendChild(createProjectItem(generalItem));
   sidebar.appendChild(projectItemsContainer);
   sidebar.appendChild(addProjectButton);
 
