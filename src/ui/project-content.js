@@ -1,11 +1,12 @@
 import { getProjects } from "../controllers/project-controller";
 import { toggleActiveItem } from "./sidebar";
+import createTaskItem from "./task-item";
+import { triggerTaskModal } from "./modal";
+import AddIcon from "../assets/add.svg";
 
 const createProjectContainer = () => {
   const projectContainer = document.createElement("div");
   projectContainer.id = "project-container";
-
-  const projectContent = document.createElement("div");
 
   projectContainer.appendChild(loadProject(getProjects()[0]));
   toggleActiveItem(document.querySelector(".project-item")); // Set General as initial active project
@@ -21,11 +22,11 @@ const loadProject = (project) => {
 
   const projectName = document.createElement("h2");
   projectName.className = "project-name";
-  projectName.textContent = project.getName();
+  projectName.textContent = project.name;
 
   const projectDescription = document.createElement("p");
   projectDescription.className = "project-description";
-  projectDescription.textContent = project.getDescription();
+  projectDescription.textContent = project.description;
 
   const editButton = document.createElement("button");
   editButton.classList = "project-edit-button";
@@ -41,6 +42,30 @@ const loadProject = (project) => {
   contentHeader.appendChild(deleteButton);
 
   projectContent.appendChild(contentHeader);
+
+  const tasks = project.tasks;
+
+  const taskItemContainer = document.createElement("div");
+  taskItemContainer.id = "task-items-container";
+
+  tasks.forEach((task) => taskItemContainer.appendChild(createTaskItem(task)));
+
+  const addTaskButton = document.createElement("button");
+  addTaskButton.id = "add-task-button";
+  const addIcon = new Image();
+  addIcon.src = AddIcon;
+  addTaskButton.appendChild(addIcon);
+  addTaskButton.addEventListener("click", () => {
+    triggerTaskModal();
+  });
+
+  const addTaskText = document.createElement("p");
+  addTaskText.textContent = "Add Task";
+  addTaskButton.appendChild(addTaskText);
+
+  taskItemContainer.appendChild(addTaskButton);
+
+  projectContent.appendChild(taskItemContainer);
 
   return projectContent;
 };

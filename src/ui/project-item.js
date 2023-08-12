@@ -6,14 +6,14 @@ const createProjectItem = (project) => {
 
   const projectName = document.createElement("p");
   projectName.className = "project-item-name";
-  projectName.textContent = project.getName();
+  projectName.textContent = project.name;
 
   const numTasksContainer = document.createElement("div");
   numTasksContainer.className = "num-tasks-container";
 
   const numTasks = document.createElement("p");
   numTasks.className = "num-tasks";
-  numTasks.textContent = project.getNumTasks();
+  numTasks.textContent = project.numTasks;
   numTasksContainer.appendChild(numTasks);
 
   projectItem.appendChild(projectName);

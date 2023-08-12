@@ -26,10 +26,18 @@ const projectFactory = (name, description, tasks) => {
   return {
     addTask,
     removeTask,
-    getNumTasks,
-    getName,
-    getDescription,
-    getTasks,
+    get name() {
+      return name;
+    },
+    get numTasks() {
+      return tasks.length;
+    },
+    get description() {
+      return description;
+    },
+    get tasks() {
+      return tasks;
+    },
   };
 };
 
