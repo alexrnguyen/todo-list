@@ -1,5 +1,8 @@
-import { getProjects } from "../controllers/project-controller";
-import { toggleActiveItem } from "./sidebar";
+import {
+  getProjects,
+  removeProjectItem,
+} from "../controllers/project-controller";
+import { removeProjectFromSidebar, toggleActiveItem } from "./sidebar";
 import createTaskItem from "./task-item";
 import { triggerTaskModal } from "./modal";
 import AddIcon from "../assets/add.svg";
@@ -9,12 +12,14 @@ const createProjectContainer = () => {
   projectContainer.id = "project-container";
 
   console.log(getProjects()[0]);
-  projectContainer.appendChild(loadProject(getProjects()[0]));
+  projectContainer.appendChild(loadGeneralProject(getProjects()[0]));
+  const generalProject = document.querySelector(".project-item");
+  generalProject.classList.add("general");
   toggleActiveItem(document.querySelector(".project-item")); // Set General as initial active project
   return projectContainer;
 };
 
-const loadProject = (project) => {
+const loadGeneralProject = (project) => {
   const projectContent = document.createElement("div");
   projectContent.id = "project-content";
 
@@ -25,27 +30,11 @@ const loadProject = (project) => {
   projectName.className = "project-name";
   projectName.textContent = project.name;
 
-  const projectDescription = document.createElement("p");
-  projectDescription.className = "project-description";
-  projectDescription.textContent = project.description;
-
-  const editButton = document.createElement("button");
-  editButton.classList = "project-edit-button";
-  editButton.textContent = "Edit";
-
-  const deleteButton = document.createElement("button");
-  deleteButton.classList = "project-delete-button";
-  deleteButton.textContent = "Delete";
-
   contentHeader.appendChild(projectName);
-  contentHeader.appendChild(editButton);
-  contentHeader.appendChild(projectDescription);
-  contentHeader.appendChild(deleteButton);
 
   projectContent.appendChild(contentHeader);
 
   const tasks = project.tasks;
-  console.log(tasks);
 
   const taskItemContainer = document.createElement("div");
   taskItemContainer.id = "task-items-container";
@@ -74,6 +63,36 @@ const loadProject = (project) => {
   return projectContent;
 };
 
+const loadProject = (project) => {
+  const projectContainer = document.querySelector(".container");
+  const projectContent = loadGeneralProject(project);
+  projectContainer.appendChild(projectContent);
+
+  const projectDescription = document.createElement("p");
+  projectDescription.className = "project-description";
+  projectDescription.textContent = project.description;
+
+  const editButton = document.createElement("button");
+  editButton.classList = "project-edit-button";
+  editButton.textContent = "Edit";
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList = "project-delete-button";
+  deleteButton.textContent = "Delete";
+
+  deleteButton.addEventListener("click", () => {
+    removeProjectFromSidebar(project);
+    removeProjectItem(project);
+  });
+
+  const contentHeader = document.getElementById("content-header");
+  contentHeader.appendChild(projectDescription);
+  contentHeader.appendChild(editButton);
+  contentHeader.appendChild(deleteButton);
+
+  return projectContent;
+};
+
 const clearContent = () => {
   const projectContainer = document.getElementById("project-container");
   projectContainer.innerHTML = "";
@@ -83,7 +102,11 @@ const changeProject = (projectItem, project) => {
   const projectContainer = document.getElementById("project-container");
   clearContent();
   toggleActiveItem(projectItem);
-  projectContainer.appendChild(loadProject(project));
+  if (projectItem.classList.contains("general")) {
+    projectContainer.appendChild(loadGeneralProject(project));
+  } else {
+    projectContainer.appendChild(loadProject(project));
+  }
 };
 
 export { createProjectContainer, loadProject, clearContent, changeProject };

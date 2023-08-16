@@ -1,7 +1,7 @@
 import AddIcon from "../assets/add.svg";
 import { triggerProjectModal } from "./modal";
 import createProjectItem from "./project-item";
-import { addProjectItem } from "../controllers/project-controller";
+import { addProjectItem, getProjects } from "../controllers/project-controller";
 import projectFactory from "../models/project";
 
 const createSidebar = () => {
@@ -48,4 +48,13 @@ const toggleActiveItem = (projectItem) => {
   projectItem.classList.toggle("active");
 };
 
-export { createSidebar, toggleActiveItem };
+const removeProjectFromSidebar = (project) => {
+  const index = getProjects().indexOf(project);
+  const projectItemToRemove = document.querySelectorAll(".project-item")[index];
+  const projectItemsContainer = document.getElementById(
+    "project-items-container"
+  );
+  projectItemsContainer.removeChild(projectItemToRemove);
+};
+
+export { createSidebar, toggleActiveItem, removeProjectFromSidebar };

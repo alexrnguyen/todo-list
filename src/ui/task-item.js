@@ -5,13 +5,7 @@ import DeleteIcon from "../assets/delete.svg";
 const createTaskItem = (task, project) => {
   const taskItem = document.createElement("div");
   taskItem.classList.add("task-item");
-
-  // Task Priority
-  const priority = document.createElement("div");
-  priority.classList.add("task-priority");
-  priority.classList.add(task.priority);
-
-  taskItem.appendChild(priority);
+  taskItem.classList.add(`priority-${task.priority.toLowerCase()}`);
 
   // Task Status
   const checkbox = document.createElement("input");

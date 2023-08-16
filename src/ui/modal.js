@@ -168,7 +168,11 @@ const triggerTaskModal = (project) => {
     const newTask = addTaskItem(name, description, dueDate, priority, project);
 
     const taskItemsContainer = document.getElementById("task-items-container");
-    taskItemsContainer.appendChild(createTaskItem(newTask, project));
+    const addTaskButton = document.getElementById("add-task-button");
+    taskItemsContainer.insertBefore(
+      createTaskItem(newTask, project),
+      addTaskButton
+    );
     taskForm.reset();
     toggleModal(taskModal);
     event.preventDefault();
