@@ -8,21 +8,6 @@ const projectFactory = (name, description, tasks) => {
     tasks.splice(indexOfTask, 1);
   }
 
-  function getNumTasks() {
-    return tasks.length;
-  }
-
-  function getName() {
-    return name;
-  }
-
-  function getDescription() {
-    return description;
-  }
-
-  function getTasks() {
-    return tasks;
-  }
   return {
     addTask,
     removeTask,

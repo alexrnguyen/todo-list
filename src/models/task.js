@@ -22,3 +22,5 @@ const taskFactory = (name, description, dueDate, priority, status) => {
     changeStatus,
   };
 };
+
+export default taskFactory;

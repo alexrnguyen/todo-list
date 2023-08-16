@@ -3,6 +3,7 @@ import { loadProject } from "./project-content";
 import createProjectItem from "./project-item";
 import createTaskItem from "./task-item";
 import CloseIcon from "../assets/close.svg";
+import { addTaskItem } from "../controllers/task-controller";
 
 // Project Modal
 const createProjectModal = () => {
@@ -54,7 +55,6 @@ const triggerProjectModal = () => {
       "project-items-container"
     );
     projectItemsContainer.appendChild(createProjectItem(newProject));
-    loadProject(newProject);
     projectForm.reset();
     toggleModal(projectModal);
     event.preventDefault();
@@ -155,7 +155,7 @@ const createTaskModal = () => {
   return taskModal;
 };
 
-const triggerTaskModal = () => {
+const triggerTaskModal = (project) => {
   const taskModal = document.getElementById("task-modal");
   toggleModal(taskModal);
 
@@ -163,13 +163,12 @@ const triggerTaskModal = () => {
   taskForm.onsubmit = (event) => {
     const name = document.getElementById("task-name").value;
     const description = document.getElementById("task-description").value;
-    const dueDate = document.getElementById("task-due-date").value;
+    const dueDate = new Date(document.getElementById("task-due-date").value);
     const priority = document.getElementById("task-priority").value;
-    const newTask = addProjectItem(name, description);
+    const newTask = addTaskItem(name, description, dueDate, priority, project);
 
     const taskItemsContainer = document.getElementById("task-items-container");
-    taskItemsContainer.appendChild(createTaskItem(newTask));
-    loadProject(newTask);
+    taskItemsContainer.appendChild(createTaskItem(newTask, project));
     taskForm.reset();
     toggleModal(taskModal);
     event.preventDefault();
@@ -232,6 +231,8 @@ const createTaskForm = () => {
   dueDateInput.id = "task-due-date";
   dueDateInput.required = true;
 
+  //dueDateInput.onchange = () => console.log(dueDateInput.valueAsDate);
+
   // Don't allow users to input past dates
   dueDateInput.min = new Date()
     .toISOString()
@@ -281,8 +282,6 @@ const addPlaceholder = () => {
   const placeholder = document.createElement("option");
   placeholder.textContent = "Priority";
   placeholder.selected = true;
-  placeholder.disabled = true;
-  placeholder.hidden = true;
   return placeholder;
 };
 

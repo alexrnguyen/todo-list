@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import EditIcon from "../assets/edit.svg";
 import DeleteIcon from "../assets/delete.svg";
 
-const createTaskItem = (task) => {
+const createTaskItem = (task, project) => {
   const taskItem = document.createElement("div");
   taskItem.classList.add("task-item");
 
@@ -30,17 +30,10 @@ const createTaskItem = (task) => {
   name.textContent = task.name;
   taskItem.appendChild(name);
 
-  // Details Button
-  const detailsButton = document.createElement("button");
-  detailsButton.className = "details-button";
-  detailsButton.textContent = "Details";
-
-  taskItem.appendChild(detailsButton);
-
   // Task Date
   const date = document.createElement("p");
   date.className = "task-date";
-  date.textContent = format(task.date, "yyyy-MM-dd");
+  date.textContent = format(task.dueDate, "yyyy-MM-dd");
   taskItem.appendChild(date);
 
   // Edit Button
@@ -63,7 +56,13 @@ const createTaskItem = (task) => {
   deleteIcon.src = DeleteIcon;
   deleteButton.appendChild(deleteIcon);
 
+  deleteButton.addEventListener("click", () => {
+    project.removeTask(task);
+  });
+
   taskItem.appendChild(deleteButton);
+
+  return taskItem;
 };
 
 export default createTaskItem;

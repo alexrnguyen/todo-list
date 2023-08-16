@@ -8,6 +8,7 @@ const createProjectContainer = () => {
   const projectContainer = document.createElement("div");
   projectContainer.id = "project-container";
 
+  console.log(getProjects()[0]);
   projectContainer.appendChild(loadProject(getProjects()[0]));
   toggleActiveItem(document.querySelector(".project-item")); // Set General as initial active project
   return projectContainer;
@@ -44,11 +45,14 @@ const loadProject = (project) => {
   projectContent.appendChild(contentHeader);
 
   const tasks = project.tasks;
+  console.log(tasks);
 
   const taskItemContainer = document.createElement("div");
   taskItemContainer.id = "task-items-container";
 
-  tasks.forEach((task) => taskItemContainer.appendChild(createTaskItem(task)));
+  tasks.forEach((task) =>
+    taskItemContainer.appendChild(createTaskItem(task, project))
+  );
 
   const addTaskButton = document.createElement("button");
   addTaskButton.id = "add-task-button";
@@ -56,7 +60,7 @@ const loadProject = (project) => {
   addIcon.src = AddIcon;
   addTaskButton.appendChild(addIcon);
   addTaskButton.addEventListener("click", () => {
-    triggerTaskModal();
+    triggerTaskModal(project);
   });
 
   const addTaskText = document.createElement("p");

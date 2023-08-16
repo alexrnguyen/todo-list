@@ -15,6 +15,14 @@ const initializeWebpage = () => {
   document.body.appendChild(createOverlay());
   document.body.appendChild(createProjectModal());
   document.body.appendChild(createTaskModal());
+
+  const menuButton = document.getElementById("menu-button");
+  menuButton.addEventListener("click", () => {
+    const container = document.querySelector(".container");
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("hidden");
+    container.classList.toggle("no-sidebar");
+  });
 };
 
 initializeWebpage();
