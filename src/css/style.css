@@ -11,6 +11,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
 
 body,
@@ -19,9 +20,9 @@ p {
 }
 
 .container {
-  min-height: 100vh;
   display: grid;
   grid-template: 1fr 10fr / 1fr 6fr;
+  min-height: 100vh;
 }
 
 .container.container.no-sidebar #project-container {
@@ -126,7 +127,6 @@ hr {
 /* || Project Content */
 #project-container {
   padding: 1rem;
-  min-height: 100vh;
 }
 
 #project-content {
