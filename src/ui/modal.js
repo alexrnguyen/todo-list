@@ -1,5 +1,4 @@
 import { addProjectItem } from "../controllers/project-controller";
-import { loadProject } from "./project-content";
 import createProjectItem from "./project-item";
 import createTaskItem from "./task-item";
 import CloseIcon from "../assets/close.svg";
@@ -93,7 +92,7 @@ const createProjectForm = () => {
   descriptionInput.id = "project-description";
   descriptionInput.rows = 10;
   descriptionInput.cols = 50;
-  descriptionInput.maxLength = 1000;
+  descriptionInput.maxLength = 300;
   descriptionInput.placeholder = "Type a message...";
 
   descriptionInputContainer.appendChild(descriptionInputLabel);
@@ -218,7 +217,7 @@ const createTaskForm = () => {
   descriptionInput.id = "task-description";
   descriptionInput.rows = 10;
   descriptionInput.cols = 50;
-  descriptionInput.maxLength = 1000;
+  descriptionInput.maxLength = 300;
   descriptionInput.placeholder = "Type a message...";
 
   descriptionInputContainer.appendChild(descriptionInputLabel);
@@ -259,11 +258,13 @@ const createTaskForm = () => {
   priorityInput.id = "task-priority";
   priorityInput.required = true;
 
-  priorityInput.add(addPlaceholder());
-
   const options = ["Low", "Medium", "High"];
   for (let i = 0; i < 3; i++) {
     const option = document.createElement("option");
+    // Select low priority by default
+    if (i === 0) {
+      option.selected = true;
+    }
     option.textContent = options[i];
     priorityInput.add(option);
   }
@@ -280,13 +281,6 @@ const createTaskForm = () => {
   taskForm.appendChild(addTaskButton);
 
   return taskForm;
-};
-
-const addPlaceholder = () => {
-  const placeholder = document.createElement("option");
-  placeholder.textContent = "Priority";
-  placeholder.selected = true;
-  return placeholder;
 };
 
 export {

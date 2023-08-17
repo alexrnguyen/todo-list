@@ -8,8 +8,12 @@ const createSidebar = () => {
   const sidebar = document.createElement("div");
   sidebar.id = "sidebar";
 
-  const generalItem = projectFactory("General", "", []);
-  addProjectItem("General", "");
+  const generalItem = projectFactory(
+    "General",
+    "What do you need to get done?",
+    []
+  );
+  addProjectItem(generalItem.name, generalItem.description);
 
   const projectItemsContainer = document.createElement("div");
   projectItemsContainer.id = "project-items-container";

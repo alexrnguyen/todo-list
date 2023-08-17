@@ -6,6 +6,8 @@ import { removeProjectFromSidebar, toggleActiveItem } from "./sidebar";
 import createTaskItem from "./task-item";
 import { triggerTaskModal } from "./modal";
 import AddIcon from "../assets/add.svg";
+import EditIcon from "../assets/edit.svg";
+import DeleteIcon from "../assets/delete.svg";
 import { triggerProjectEditModal } from "./edit-modal";
 
 const createProjectContainer = () => {
@@ -30,7 +32,12 @@ const loadGeneralProject = (project) => {
   projectName.className = "project-name";
   projectName.textContent = project.name;
 
+  const projectDescription = document.createElement("p");
+  projectDescription.className = "project-description";
+  projectDescription.textContent = project.description;
+
   contentHeader.appendChild(projectName);
+  contentHeader.appendChild(projectDescription);
 
   projectContent.appendChild(contentHeader);
 
@@ -68,13 +75,13 @@ const loadProject = (project) => {
   const projectContent = loadGeneralProject(project);
   projectContainer.appendChild(projectContent);
 
-  const projectDescription = document.createElement("p");
-  projectDescription.className = "project-description";
-  projectDescription.textContent = project.description;
-
   const editButton = document.createElement("button");
   editButton.classList = "project-edit-button";
   editButton.textContent = "Edit";
+  const editIcon = new Image();
+  editIcon.classList.add("icon");
+  editIcon.src = EditIcon;
+  editButton.appendChild(editIcon);
 
   editButton.addEventListener("click", () => {
     triggerProjectEditModal(project);
@@ -83,6 +90,10 @@ const loadProject = (project) => {
   const deleteButton = document.createElement("button");
   deleteButton.classList = "project-delete-button";
   deleteButton.textContent = "Delete";
+  const deleteIcon = new Image();
+  deleteIcon.classList.add("icon");
+  deleteIcon.src = DeleteIcon;
+  deleteButton.appendChild(deleteIcon);
 
   deleteButton.addEventListener("click", () => {
     removeProjectFromSidebar(project);
@@ -91,7 +102,6 @@ const loadProject = (project) => {
   });
 
   const contentHeader = document.getElementById("content-header");
-  contentHeader.appendChild(projectDescription);
   contentHeader.appendChild(editButton);
   contentHeader.appendChild(deleteButton);
 

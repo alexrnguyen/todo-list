@@ -17,7 +17,11 @@ const createTaskItem = (task, project) => {
   checkbox.name = "task-checkbox";
   checkbox.checked = task.status;
 
-  checkbox.addEventListener("click", () => task.changeStatus());
+  checkbox.addEventListener("click", () => {
+    task.changeStatus();
+    const priority = task.priority;
+    markAsComplete(taskItem, priority);
+  });
 
   taskItem.appendChild(checkbox);
 
@@ -66,6 +70,11 @@ const createTaskItem = (task, project) => {
   taskItem.appendChild(deleteButton);
 
   return taskItem;
+};
+
+const markAsComplete = (taskItem, priority) => {
+  taskItem.classList.toggle(`priority-${priority.toLowerCase()}`);
+  taskItem.classList.toggle("completed");
 };
 
 export default createTaskItem;

@@ -1,4 +1,4 @@
-import { loadProject, clearContent, changeProject } from "./project-content";
+import { changeProject } from "./project-content";
 
 const createProjectItem = (project) => {
   const projectItem = document.createElement("div");

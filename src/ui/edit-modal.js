@@ -1,7 +1,8 @@
+import { format } from "date-fns";
 import CloseIcon from "../assets/close.svg";
 import { updateProject } from "../controllers/project-controller";
 import { toggleModal } from "./modal";
-import { changeProject, loadProject, updateTaskItem } from "./project-content";
+import { changeProject, updateTaskItem } from "./project-content";
 import { updateProjectItem } from "./sidebar";
 const createProjectEditModal = () => {
   const projectEditModal = document.createElement("div");
@@ -94,7 +95,7 @@ const createProjectEditForm = () => {
   descriptionInput.id = "project-edit-description";
   descriptionInput.rows = 10;
   descriptionInput.cols = 50;
-  descriptionInput.maxLength = 1000;
+  descriptionInput.maxLength = 300;
   descriptionInput.placeholder = "Type a message...";
 
   descriptionInputContainer.appendChild(descriptionInputLabel);
@@ -152,7 +153,10 @@ const triggerTaskEditModal = (task, project) => {
   const taskEditModal = document.getElementById("task-edit-modal");
   document.getElementById("task-edit-name").value = task.name;
   document.getElementById("task-edit-description").value = task.description;
-  document.getElementById("task-edit-due-date").value = task.dueDate;
+  document.getElementById("task-edit-due-date").value = format(
+    task.dueDate,
+    "yyyy-MM-dd"
+  );
   document.getElementById("task-edit-priority").value = task.priority;
   toggleModal(taskEditModal);
 
@@ -209,7 +213,7 @@ const createTaskEditForm = () => {
   descriptionInput.id = "task-edit-description";
   descriptionInput.rows = 10;
   descriptionInput.cols = 50;
-  descriptionInput.maxLength = 1000;
+  descriptionInput.maxLength = 300;
   descriptionInput.placeholder = "Type a message...";
 
   descriptionInputContainer.appendChild(descriptionInputLabel);
