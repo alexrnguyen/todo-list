@@ -295,4 +295,5 @@ export {
   createOverlay,
   createTaskModal,
   triggerTaskModal,
+  toggleModal,
 };

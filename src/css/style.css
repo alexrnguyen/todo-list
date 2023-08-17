@@ -178,6 +178,8 @@ hr {
   border-left: 10px solid;
   border-radius: 10px;
   align-items: center;
+  background-color: var(--secondary-color);
+  padding: 1rem;
 }
 
 /* Task Priority */

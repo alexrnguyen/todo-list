@@ -48,6 +48,18 @@ const toggleActiveItem = (projectItem) => {
   projectItem.classList.toggle("active");
 };
 
+const updateProjectItem = (project) => {
+  const index = getProjects().indexOf(project);
+  const projectItemToUpdate = document.querySelectorAll(".project-item")[index];
+  const projectItemsContainer = document.getElementById(
+    "project-items-container"
+  );
+  const updatedProjectItem = createProjectItem(project);
+  projectItemsContainer.insertBefore(updatedProjectItem, projectItemToUpdate);
+  projectItemsContainer.removeChild(projectItemToUpdate);
+  return updatedProjectItem;
+};
+
 const removeProjectFromSidebar = (project) => {
   const index = getProjects().indexOf(project);
   const projectItemToRemove = document.querySelectorAll(".project-item")[index];
@@ -57,4 +69,9 @@ const removeProjectFromSidebar = (project) => {
   projectItemsContainer.removeChild(projectItemToRemove);
 };
 
-export { createSidebar, toggleActiveItem, removeProjectFromSidebar };
+export {
+  createSidebar,
+  toggleActiveItem,
+  removeProjectFromSidebar,
+  updateProjectItem,
+};

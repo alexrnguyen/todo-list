@@ -3,6 +3,7 @@ import { createSidebar } from "./ui/sidebar";
 import { createProjectContainer } from "./ui/project-content";
 import { createProjectModal, createTaskModal, createOverlay } from "./ui/modal";
 import "./css/style.css";
+import { createProjectEditModal, createTaskEditModal } from "./ui/edit-modal";
 
 const initializeWebpage = () => {
   const container = document.createElement("div");
@@ -15,6 +16,8 @@ const initializeWebpage = () => {
   document.body.appendChild(createOverlay());
   document.body.appendChild(createProjectModal());
   document.body.appendChild(createTaskModal());
+  document.body.appendChild(createProjectEditModal());
+  //document.body.appendChild(createTaskEditModal());
 
   const menuButton = document.getElementById("menu-button");
   menuButton.addEventListener("click", () => {

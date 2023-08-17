@@ -12,9 +12,14 @@ const addProjectItem = (name, description) => {
   return newProject;
 };
 
+const updateProject = (project) => {
+  const index = projects.indexOf(project);
+  projects[index] = project;
+};
+
 const removeProjectItem = (project) => {
   const index = projects.indexOf(project);
   projects.splice(index, 1);
 };
 
-export { addProjectItem, getProjects, removeProjectItem };
+export { addProjectItem, getProjects, updateProject, removeProjectItem };

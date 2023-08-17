@@ -6,12 +6,12 @@ import { removeProjectFromSidebar, toggleActiveItem } from "./sidebar";
 import createTaskItem from "./task-item";
 import { triggerTaskModal } from "./modal";
 import AddIcon from "../assets/add.svg";
+import { triggerProjectEditModal } from "./edit-modal";
 
 const createProjectContainer = () => {
   const projectContainer = document.createElement("div");
   projectContainer.id = "project-container";
 
-  console.log(getProjects()[0]);
   projectContainer.appendChild(loadGeneralProject(getProjects()[0]));
   const generalProject = document.querySelector(".project-item");
   generalProject.classList.add("general");
@@ -75,6 +75,10 @@ const loadProject = (project) => {
   const editButton = document.createElement("button");
   editButton.classList = "project-edit-button";
   editButton.textContent = "Edit";
+
+  editButton.addEventListener("click", () => {
+    triggerProjectEditModal(project);
+  });
 
   const deleteButton = document.createElement("button");
   deleteButton.classList = "project-delete-button";
