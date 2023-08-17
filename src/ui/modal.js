@@ -235,8 +235,6 @@ const createTaskForm = () => {
   dueDateInput.id = "task-due-date";
   dueDateInput.required = true;
 
-  //dueDateInput.onchange = () => console.log(dueDateInput.valueAsDate);
-
   // Don't allow users to input past dates
   dueDateInput.min = new Date()
     .toISOString()

@@ -8,9 +8,15 @@ const projectFactory = (name, description, tasks) => {
     tasks.splice(indexOfTask, 1);
   }
 
+  function updateTask(updatedTask) {
+    const indexOfTask = tasks.indexOf(updatedTask);
+    tasks[indexOfTask] = updatedTask;
+  }
+
   return {
     addTask,
     removeTask,
+    updateTask,
     get name() {
       return name;
     },

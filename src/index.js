@@ -17,7 +17,7 @@ const initializeWebpage = () => {
   document.body.appendChild(createProjectModal());
   document.body.appendChild(createTaskModal());
   document.body.appendChild(createProjectEditModal());
-  //document.body.appendChild(createTaskEditModal());
+  document.body.appendChild(createTaskEditModal());
 
   const menuButton = document.getElementById("menu-button");
   menuButton.addEventListener("click", () => {

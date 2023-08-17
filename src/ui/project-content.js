@@ -114,6 +114,15 @@ const changeProject = (projectItem, project) => {
   }
 };
 
+const updateTaskItem = (task, project) => {
+  const index = project.tasks.indexOf(task);
+  const taskItemToUpdate = document.querySelectorAll(".task-item")[index];
+  const taskItemsContainer = document.getElementById("task-items-container");
+  const updatedTaskItem = createTaskItem(task, project);
+  taskItemsContainer.insertBefore(updatedTaskItem, taskItemToUpdate);
+  taskItemsContainer.removeChild(taskItemToUpdate);
+};
+
 const removeTaskItem = (taskItem) => {
   const taskItemsContainer = document.getElementById("task-items-container");
   taskItemsContainer.removeChild(taskItem);
@@ -124,5 +133,6 @@ export {
   loadProject,
   clearContent,
   changeProject,
+  updateTaskItem,
   removeTaskItem,
 };

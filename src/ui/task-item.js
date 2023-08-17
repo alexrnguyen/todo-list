@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import EditIcon from "../assets/edit.svg";
 import DeleteIcon from "../assets/delete.svg";
 import { removeTaskItem } from "./project-content";
+import { triggerTaskEditModal } from "./edit-modal";
 
 const createTaskItem = (task, project) => {
   const taskItem = document.createElement("div");
@@ -39,6 +40,10 @@ const createTaskItem = (task, project) => {
   editIcon.classList.add("icon");
   editIcon.src = EditIcon;
   editButton.appendChild(editIcon);
+
+  editButton.addEventListener("click", () => {
+    triggerTaskEditModal(task, project);
+  });
 
   taskItem.appendChild(editButton);
 
