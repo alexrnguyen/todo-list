@@ -4,6 +4,7 @@ import createProjectItem from "./project-item";
 import createTaskItem from "./task-item";
 import CloseIcon from "../assets/close.svg";
 import { addTaskItem } from "../controllers/task-controller";
+import { updateProjectCount } from "./sidebar";
 
 // Project Modal
 const createProjectModal = () => {
@@ -173,6 +174,7 @@ const triggerTaskModal = (project) => {
       createTaskItem(newTask, project),
       addTaskButton
     );
+    updateProjectCount(project, true);
     taskForm.reset();
     toggleModal(taskModal);
     event.preventDefault();

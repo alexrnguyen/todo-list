@@ -48,6 +48,18 @@ const toggleActiveItem = (projectItem) => {
   projectItem.classList.toggle("active");
 };
 
+const updateProjectCount = (project, projectAdded) => {
+  const index = getProjects().indexOf(project);
+  const numTasks =
+    document.querySelectorAll(".project-item")[index].lastChild.firstChild;
+
+  if (projectAdded) {
+    numTasks.textContent++;
+  } else {
+    numTasks.textContent--;
+  }
+};
+
 const updateProjectItem = (project) => {
   const index = getProjects().indexOf(project);
   const projectItemToUpdate = document.querySelectorAll(".project-item")[index];
@@ -73,5 +85,6 @@ export {
   createSidebar,
   toggleActiveItem,
   removeProjectFromSidebar,
+  updateProjectCount,
   updateProjectItem,
 };

@@ -3,6 +3,7 @@ import EditIcon from "../assets/edit.svg";
 import DeleteIcon from "../assets/delete.svg";
 import { removeTaskItem } from "./project-content";
 import { triggerTaskEditModal } from "./edit-modal";
+import { updateProjectCount } from "./sidebar";
 
 const createTaskItem = (task, project) => {
   const taskItem = document.createElement("div");
@@ -59,6 +60,7 @@ const createTaskItem = (task, project) => {
   deleteButton.addEventListener("click", () => {
     project.removeTask(task);
     removeTaskItem(taskItem);
+    updateProjectCount(project, false);
   });
 
   taskItem.appendChild(deleteButton);
