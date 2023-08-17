@@ -64,7 +64,7 @@ const loadGeneralProject = (project) => {
 };
 
 const loadProject = (project) => {
-  const projectContainer = document.querySelector(".container");
+  const projectContainer = document.getElementById("project-container");
   const projectContent = loadGeneralProject(project);
   projectContainer.appendChild(projectContent);
 
@@ -83,6 +83,7 @@ const loadProject = (project) => {
   deleteButton.addEventListener("click", () => {
     removeProjectFromSidebar(project);
     removeProjectItem(project);
+    projectContainer.innerHTML = "";
   });
 
   const contentHeader = document.getElementById("content-header");
@@ -109,4 +110,15 @@ const changeProject = (projectItem, project) => {
   }
 };
 
-export { createProjectContainer, loadProject, clearContent, changeProject };
+const removeTaskItem = (taskItem) => {
+  const taskItemsContainer = document.getElementById("task-items-container");
+  taskItemsContainer.removeChild(taskItem);
+};
+
+export {
+  createProjectContainer,
+  loadProject,
+  clearContent,
+  changeProject,
+  removeTaskItem,
+};

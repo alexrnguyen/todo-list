@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import EditIcon from "../assets/edit.svg";
 import DeleteIcon from "../assets/delete.svg";
+import { removeTaskItem } from "./project-content";
 
 const createTaskItem = (task, project) => {
   const taskItem = document.createElement("div");
@@ -52,6 +53,7 @@ const createTaskItem = (task, project) => {
 
   deleteButton.addEventListener("click", () => {
     project.removeTask(task);
+    removeTaskItem(taskItem);
   });
 
   taskItem.appendChild(deleteButton);
