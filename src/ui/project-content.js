@@ -15,7 +15,7 @@ const createProjectContainer = () => {
   projectContainer.appendChild(loadGeneralProject(getProjects()[0]));
   const generalProject = document.querySelector(".project-item");
   generalProject.classList.add("general");
-  toggleActiveItem(document.querySelector(".project-item")); // Set General as initial active project
+  toggleActiveItem(document.querySelector(".general")); // Set General as initial active project
   return projectContainer;
 };
 
@@ -104,7 +104,7 @@ const changeProject = (projectItem, project) => {
   clearContent();
   toggleActiveItem(projectItem);
   if (projectItem.classList.contains("general")) {
-    projectContainer.appendChild(loadGeneralProject(project));
+    projectContainer.appendChild(loadGeneralProject(getProjects()[0]));
   } else {
     projectContainer.appendChild(loadProject(project));
   }
