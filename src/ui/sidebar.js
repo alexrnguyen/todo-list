@@ -3,6 +3,7 @@ import { triggerProjectModal } from "./modal";
 import createProjectItem from "./project-item";
 import { addProjectItem, getProjects } from "../controllers/project-controller";
 import projectFactory from "../models/project";
+import { retrieveProjects } from "../controllers/storage";
 
 const createSidebar = () => {
   const sidebar = document.createElement("div");
@@ -13,10 +14,22 @@ const createSidebar = () => {
     "What do you need to get done?",
     []
   );
-  addProjectItem(generalItem.name, generalItem.description);
 
   const projectItemsContainer = document.createElement("div");
   projectItemsContainer.id = "project-items-container";
+
+  const projectsInStorage = retrieveProjects();
+
+  if (projectsInStorage === null) {
+    addProjectItem(generalItem.name, generalItem.description, []);
+  } else {
+    const generalProject = projectsInStorage[0];
+    addProjectItem(
+      generalProject.name,
+      generalProject.description,
+      generalProject.tasks
+    );
+  }
 
   const projectItemsHeader = document.createElement("p");
   projectItemsHeader.id = "project-items-header";
@@ -25,6 +38,14 @@ const createSidebar = () => {
 
   const itemsContainerUnderline = document.createElement("hr");
   projectItemsContainer.appendChild(itemsContainerUnderline);
+
+  projectsInStorage.shift();
+  const userProjects = projectsInStorage;
+  // Add existing projects to container
+  for (const project of userProjects) {
+    addProjectItem(project.name, project.description, project.tasks);
+    projectItemsContainer.appendChild(createProjectItem(project));
+  }
 
   const addProjectButton = document.createElement("button");
   addProjectButton.id = "add-project-button";

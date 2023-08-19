@@ -1,4 +1,5 @@
 import projectFactory from "../models/project";
+import { retrieveProjects } from "./storage";
 
 let projects = [];
 
@@ -6,8 +7,8 @@ const getProjects = () => {
   return projects;
 };
 
-const addProjectItem = (name, description) => {
-  const newProject = projectFactory(name, description, []);
+const addProjectItem = (name, description, tasks = []) => {
+  const newProject = projectFactory(name, description, tasks);
   projects.push(newProject);
   return newProject;
 };

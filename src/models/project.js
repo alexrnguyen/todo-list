@@ -23,9 +23,6 @@ const projectFactory = (name, description, tasks) => {
     set name(newName) {
       name = newName;
     },
-    get numTasks() {
-      return tasks.length;
-    },
     get description() {
       return description;
     },

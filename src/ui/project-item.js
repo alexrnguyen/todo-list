@@ -13,7 +13,7 @@ const createProjectItem = (project) => {
 
   const numTasks = document.createElement("p");
   numTasks.className = "num-tasks";
-  numTasks.textContent = project.numTasks;
+  numTasks.textContent = project.tasks.length;
   numTasksContainer.appendChild(numTasks);
 
   projectItem.appendChild(projectName);

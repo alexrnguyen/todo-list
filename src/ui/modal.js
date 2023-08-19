@@ -1,9 +1,10 @@
-import { addProjectItem } from "../controllers/project-controller";
+import { addProjectItem, getProjects } from "../controllers/project-controller";
 import createProjectItem from "./project-item";
 import createTaskItem from "./task-item";
 import CloseIcon from "../assets/close.svg";
 import { addTaskItem } from "../controllers/task-controller";
 import { updateProjectCount } from "./sidebar";
+import { updateProjects } from "../controllers/storage";
 
 // Project Modal
 const createProjectModal = () => {
@@ -49,7 +50,10 @@ const triggerProjectModal = () => {
   projectForm.onsubmit = (event) => {
     const name = document.getElementById("project-name").value;
     const description = document.getElementById("project-description").value;
+    console.log(getProjects());
     const newProject = addProjectItem(name, description);
+    console.log(getProjects());
+    updateProjects(getProjects());
 
     const projectItemsContainer = document.getElementById(
       "project-items-container"
