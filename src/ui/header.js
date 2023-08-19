@@ -11,7 +11,7 @@ const createHeader = () => {
   menuButton.appendChild(menuIcon);
 
   const appName = document.createElement("h1");
-  appName.textContent = "ToDoList";
+  appName.textContent = "To Do List";
 
   header.appendChild(menuButton);
   header.appendChild(appName);
