@@ -1,5 +1,3 @@
-import { getProjects } from "./project-controller";
-
 const retrieveProjects = () => {
   return JSON.parse(localStorage.getItem("projects"));
 };

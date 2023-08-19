@@ -4,7 +4,7 @@ import createProjectItem from "./project-item";
 import { addProjectItem, getProjects } from "../controllers/project-controller";
 import projectFactory from "../models/project";
 import { retrieveProjects, updateProjects } from "../controllers/storage";
-import taskFactory from "../models/task";
+import { addTaskItem } from "../controllers/task-controller";
 
 const createSidebar = () => {
   const sidebar = document.createElement("div");
@@ -22,13 +22,16 @@ const createSidebar = () => {
     updateProjects(getProjects());
     projectsInStorage = retrieveProjects();
   } else {
+    console.log(projectsInStorage);
     const generalProject = projectsInStorage[0];
-    addProjectItem(
+    const project = addProjectItem(
       generalProject.name,
       generalProject.description,
       generalProject.tasks
     );
-    initializeTasks(generalProject);
+    console.log(generalProject);
+    console.log(project);
+    initializeTasks(project);
   }
 
   const projectItemsHeader = document.createElement("p");
@@ -113,19 +116,24 @@ const removeProjectFromSidebar = (project) => {
 };
 
 const initializeTasks = (project) => {
-  const tasks = [];
-  for (const object in project.tasks) {
-    const task = taskFactory(
-      object.name,
-      object.description,
-      object.dueDate,
-      object.priority,
-      object.status,
+  console.log(project);
+  let taskObjects = [...project.tasks];
+  console.log(taskObjects);
+  let tasks = [];
+  for (const taskObject of taskObjects) {
+    const task = addTaskItem(
+      taskObject.name,
+      taskObject.description,
+      taskObject.dueDate,
+      taskObject.priority,
+      taskObject.status,
       project
     );
     tasks.push(task);
   }
   project.tasks = tasks;
+  console.log(project.tasks);
+  updateProjects(getProjects());
 };
 
 export {

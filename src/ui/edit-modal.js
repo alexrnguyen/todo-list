@@ -1,4 +1,3 @@
-import { parseISO } from "date-fns";
 import CloseIcon from "../assets/close.svg";
 import { getProjects, updateProject } from "../controllers/project-controller";
 import { toggleModal } from "./modal";
@@ -155,10 +154,7 @@ const triggerTaskEditModal = (task, project) => {
   const taskEditModal = document.getElementById("task-edit-modal");
   document.getElementById("task-edit-name").value = task.name;
   document.getElementById("task-edit-description").value = task.description;
-  document.getElementById("task-edit-due-date").value = parseISO(
-    task.dueDate,
-    "yyyy-MM-dd"
-  );
+  document.getElementById("task-edit-due-date").value = task.dueDate;
   document.getElementById("task-edit-priority").value = task.priority;
   toggleModal(taskEditModal);
 
@@ -166,9 +162,7 @@ const triggerTaskEditModal = (task, project) => {
   taskEditForm.onsubmit = (event) => {
     const name = document.getElementById("task-edit-name").value;
     const description = document.getElementById("task-edit-description").value;
-    const dueDate = new Date(
-      document.getElementById("task-edit-due-date").value
-    );
+    const dueDate = document.getElementById("task-edit-due-date").value;
     const priority = document.getElementById("task-edit-priority").value;
     task.name = name;
     task.description = description;

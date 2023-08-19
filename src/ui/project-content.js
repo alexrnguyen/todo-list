@@ -47,9 +47,9 @@ const loadGeneralProject = (project) => {
   const taskItemContainer = document.createElement("div");
   taskItemContainer.id = "task-items-container";
 
-  tasks.forEach((task) =>
-    taskItemContainer.appendChild(createTaskItem(task, project))
-  );
+  tasks.forEach((task) => {
+    taskItemContainer.appendChild(createTaskItem(task, project));
+  });
 
   const addTaskButton = document.createElement("button");
   addTaskButton.id = "add-task-button";

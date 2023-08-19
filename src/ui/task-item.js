@@ -1,4 +1,4 @@
-import { parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import EditIcon from "../assets/edit.svg";
 import DeleteIcon from "../assets/delete.svg";
 import { removeTaskItem } from "./project-content";
@@ -12,6 +12,11 @@ const createTaskItem = (task, project) => {
   taskItem.classList.add("task-item");
   taskItem.classList.add(`priority-${task.priority.toLowerCase()}`);
 
+  // Add border colour of green if the task is already completed
+  if (task.status) {
+    taskItem.classList.add("completed");
+  }
+
   // Task Status
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -23,6 +28,7 @@ const createTaskItem = (task, project) => {
     task.changeStatus();
     const priority = task.priority;
     markAsComplete(taskItem, priority);
+    updateProjects(getProjects());
   });
 
   taskItem.appendChild(checkbox);
@@ -36,7 +42,7 @@ const createTaskItem = (task, project) => {
   // Task Date
   const date = document.createElement("p");
   date.className = "task-date";
-  date.textContent = parseISO(task.dueDate, "yyyy-MM-dd");
+  date.textContent = format(parseISO(task.dueDate), "yyyy-MM-dd");
   taskItem.appendChild(date);
 
   // Edit Button
@@ -76,8 +82,7 @@ const createTaskItem = (task, project) => {
   return taskItem;
 };
 
-const markAsComplete = (taskItem, priority) => {
-  taskItem.classList.toggle(`priority-${priority.toLowerCase()}`);
+const markAsComplete = (taskItem) => {
   taskItem.classList.toggle("completed");
 };
 

@@ -166,7 +166,7 @@ const triggerTaskModal = (project) => {
   taskForm.onsubmit = (event) => {
     const name = document.getElementById("task-name").value;
     const description = document.getElementById("task-description").value;
-    const dueDate = new Date(document.getElementById("task-due-date").value);
+    const dueDate = document.getElementById("task-due-date").value;
     const priority = document.getElementById("task-priority").value;
     const newTask = addTaskItem(
       name,
