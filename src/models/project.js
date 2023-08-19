@@ -32,6 +32,9 @@ const projectFactory = (name, description, tasks) => {
     get tasks() {
       return tasks;
     },
+    set tasks(newTasks) {
+      tasks = newTasks;
+    },
   };
 };
 

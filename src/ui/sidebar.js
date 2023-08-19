@@ -3,25 +3,24 @@ import { triggerProjectModal } from "./modal";
 import createProjectItem from "./project-item";
 import { addProjectItem, getProjects } from "../controllers/project-controller";
 import projectFactory from "../models/project";
-import { retrieveProjects } from "../controllers/storage";
+import { retrieveProjects, updateProjects } from "../controllers/storage";
+import taskFactory from "../models/task";
 
 const createSidebar = () => {
   const sidebar = document.createElement("div");
   sidebar.id = "sidebar";
 
-  const generalItem = projectFactory(
-    "General",
-    "What do you need to get done?",
-    []
-  );
+  const generalItem = projectFactory("General", "What are you working on?", []);
 
   const projectItemsContainer = document.createElement("div");
   projectItemsContainer.id = "project-items-container";
 
-  const projectsInStorage = retrieveProjects();
+  let projectsInStorage = retrieveProjects();
 
   if (projectsInStorage === null) {
     addProjectItem(generalItem.name, generalItem.description, []);
+    updateProjects(getProjects());
+    projectsInStorage = retrieveProjects();
   } else {
     const generalProject = projectsInStorage[0];
     addProjectItem(
@@ -29,6 +28,7 @@ const createSidebar = () => {
       generalProject.description,
       generalProject.tasks
     );
+    initializeTasks(generalProject);
   }
 
   const projectItemsHeader = document.createElement("p");
@@ -43,8 +43,14 @@ const createSidebar = () => {
   const userProjects = projectsInStorage;
   // Add existing projects to container
   for (const project of userProjects) {
-    addProjectItem(project.name, project.description, project.tasks);
-    projectItemsContainer.appendChild(createProjectItem(project));
+    const projectInStorage = addProjectItem(
+      project.name,
+      project.description,
+      project.tasks
+    );
+    console.log(projectInStorage);
+    initializeTasks(projectInStorage);
+    projectItemsContainer.appendChild(createProjectItem(projectInStorage));
   }
 
   const addProjectButton = document.createElement("button");
@@ -104,6 +110,22 @@ const removeProjectFromSidebar = (project) => {
     "project-items-container"
   );
   projectItemsContainer.removeChild(projectItemToRemove);
+};
+
+const initializeTasks = (project) => {
+  const tasks = [];
+  for (const object in project.tasks) {
+    const task = taskFactory(
+      object.name,
+      object.description,
+      object.dueDate,
+      object.priority,
+      object.status,
+      project
+    );
+    tasks.push(task);
+  }
+  project.tasks = tasks;
 };
 
 export {

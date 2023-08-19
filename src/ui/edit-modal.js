@@ -1,9 +1,10 @@
-import { format } from "date-fns";
+import { parseISO } from "date-fns";
 import CloseIcon from "../assets/close.svg";
-import { updateProject } from "../controllers/project-controller";
+import { getProjects, updateProject } from "../controllers/project-controller";
 import { toggleModal } from "./modal";
 import { changeProject, updateTaskItem } from "./project-content";
 import { updateProjectItem } from "./sidebar";
+import { updateProjects } from "../controllers/storage";
 const createProjectEditModal = () => {
   const projectEditModal = document.createElement("div");
   projectEditModal.id = "project-edit-modal";
@@ -56,6 +57,7 @@ const triggerProjectEditModal = (project) => {
     project.description = description;
 
     updateProject(project);
+    updateProjects(getProjects());
     const updatedProjectItem = updateProjectItem(project);
     changeProject(updatedProjectItem, project);
     projectEditForm.reset();
@@ -153,7 +155,7 @@ const triggerTaskEditModal = (task, project) => {
   const taskEditModal = document.getElementById("task-edit-modal");
   document.getElementById("task-edit-name").value = task.name;
   document.getElementById("task-edit-description").value = task.description;
-  document.getElementById("task-edit-due-date").value = format(
+  document.getElementById("task-edit-due-date").value = parseISO(
     task.dueDate,
     "yyyy-MM-dd"
   );
@@ -175,6 +177,7 @@ const triggerTaskEditModal = (task, project) => {
 
     project.updateTask(task);
     updateTaskItem(task, project);
+    updateProjects(getProjects());
 
     taskEditForm.reset();
     toggleModal(taskEditModal);

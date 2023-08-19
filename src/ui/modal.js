@@ -52,7 +52,6 @@ const triggerProjectModal = () => {
     const description = document.getElementById("project-description").value;
     console.log(getProjects());
     const newProject = addProjectItem(name, description);
-    console.log(getProjects());
     updateProjects(getProjects());
 
     const projectItemsContainer = document.getElementById(
@@ -169,7 +168,15 @@ const triggerTaskModal = (project) => {
     const description = document.getElementById("task-description").value;
     const dueDate = new Date(document.getElementById("task-due-date").value);
     const priority = document.getElementById("task-priority").value;
-    const newTask = addTaskItem(name, description, dueDate, priority, project);
+    const newTask = addTaskItem(
+      name,
+      description,
+      dueDate,
+      priority,
+      false,
+      project
+    );
+    updateProjects(getProjects());
 
     const taskItemsContainer = document.getElementById("task-items-container");
     const addTaskButton = document.getElementById("add-task-button");

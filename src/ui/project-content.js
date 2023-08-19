@@ -1,5 +1,4 @@
 import {
-  addProjectItem,
   getProjects,
   removeProjectItem,
 } from "../controllers/project-controller";
@@ -10,6 +9,7 @@ import AddIcon from "../assets/add.svg";
 import EditIcon from "../assets/edit.svg";
 import DeleteIcon from "../assets/delete.svg";
 import { triggerProjectEditModal } from "./edit-modal";
+import { updateProjects } from "../controllers/storage";
 
 const createProjectContainer = () => {
   const projectContainer = document.createElement("div");
@@ -99,6 +99,7 @@ const loadProject = (project) => {
   deleteButton.addEventListener("click", () => {
     removeProjectFromSidebar(project);
     removeProjectItem(project);
+    updateProjects(getProjects());
     projectContainer.innerHTML = "";
   });
 

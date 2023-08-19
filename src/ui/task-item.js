@@ -1,9 +1,11 @@
-import { format } from "date-fns";
+import { parseISO } from "date-fns";
 import EditIcon from "../assets/edit.svg";
 import DeleteIcon from "../assets/delete.svg";
 import { removeTaskItem } from "./project-content";
 import { triggerTaskEditModal } from "./edit-modal";
 import { updateProjectCount } from "./sidebar";
+import { updateProjects } from "../controllers/storage";
+import { getProjects } from "../controllers/project-controller";
 
 const createTaskItem = (task, project) => {
   const taskItem = document.createElement("div");
@@ -34,7 +36,7 @@ const createTaskItem = (task, project) => {
   // Task Date
   const date = document.createElement("p");
   date.className = "task-date";
-  date.textContent = format(task.dueDate, "yyyy-MM-dd");
+  date.textContent = parseISO(task.dueDate, "yyyy-MM-dd");
   taskItem.appendChild(date);
 
   // Edit Button
@@ -48,6 +50,7 @@ const createTaskItem = (task, project) => {
 
   editButton.addEventListener("click", () => {
     triggerTaskEditModal(task, project);
+    updateProjects(getProjects());
   });
 
   taskItem.appendChild(editButton);
@@ -64,6 +67,7 @@ const createTaskItem = (task, project) => {
   deleteButton.addEventListener("click", () => {
     project.removeTask(task);
     removeTaskItem(taskItem);
+    updateProjects(getProjects());
     updateProjectCount(project, false);
   });
 
