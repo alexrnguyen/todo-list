@@ -79,6 +79,7 @@ const createProjectEditForm = () => {
   nameInput.type = "text";
   nameInput.name = "project-edit-name";
   nameInput.id = "project-edit-name";
+  nameInput.maxLength = 150;
   nameInput.required = true;
 
   nameInputContainer.appendChild(nameInputLabel);

@@ -63,7 +63,8 @@ const createTaskItem = (task, project) => {
 
   // Delete Button
   const deleteButton = document.createElement("button");
-  deleteButton.className = "task-delete-button";
+  deleteButton.classList.add("task-delete-button");
+  deleteButton.classList.add("delete-button");
 
   const deleteIcon = new Image();
   deleteIcon.classList.add("icon");

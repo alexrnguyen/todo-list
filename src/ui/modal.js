@@ -78,6 +78,7 @@ const createProjectForm = () => {
   nameInput.type = "text";
   nameInput.name = "project-name";
   nameInput.id = "project-name";
+  nameInput.maxLength = 150;
   nameInput.required = true;
 
   nameInputContainer.appendChild(nameInputLabel);

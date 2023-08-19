@@ -89,7 +89,8 @@ const loadProject = (project) => {
   });
 
   const deleteButton = document.createElement("button");
-  deleteButton.classList = "project-delete-button";
+  deleteButton.classList.add("project-delete-button");
+  deleteButton.classList.add("delete-button");
   deleteButton.textContent = "Delete";
   const deleteIcon = new Image();
   deleteIcon.classList.add("icon");
